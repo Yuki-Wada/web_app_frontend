@@ -136,6 +136,10 @@ export default {
                         name: "Reversi Viewer",
                         link: "/reversi_viewer"
                     },
+                    {
+                        name: "Unity WebGL",
+                        link: "/unity_webgl"
+                    },
                 ]
             },
         ]
