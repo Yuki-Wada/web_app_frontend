@@ -1,54 +1,56 @@
 <template>
-  <div class="home">
-    <div id="selection">
-      <v-select
-        label="Algorithms"
-        v-model="selected_algorithm"
-        :items="options"
-        item-text="text"
-        item-value="value"
-        outlined
-        dense
-      ></v-select>
-    </div>
-    <table>
-      <tr>
-        <td><v-text-field label="warm_up_iteration" v-model.number="warm_up_iteration"/></td>
-        <td><v-text-field label="max_iteration" v-model.number="max_iteration"/></td>
-        <td><v-text-field label="max_step" v-model.number="max_step"/></td>
-        <td><v-text-field label="gamma" v-model.number="gamma"/></td>
-      </tr>
-    </table>
-    <div v-if="selected_algorithm === 'sarsalambda'">
+  <v-container>
+    <div class="home">
+      <div id="selection">
+        <v-select
+          label="Algorithms"
+          v-model="selected_algorithm"
+          :items="options"
+          item-text="text"
+          item-value="value"
+          outlined
+          dense
+        ></v-select>
+      </div>
       <table>
         <tr>
-          <td><v-text-field label="alpha" v-model.number="alpha"/></td>
-          <td><v-text-field label="epsilon" v-model.number="epsilon"/></td>
-          <td><v-text-field label="lambda" v-model.number="lambda"/></td>
+          <td><v-text-field label="warm_up_iteration" v-model.number="warm_up_iteration"/></td>
+          <td><v-text-field label="max_iteration" v-model.number="max_iteration"/></td>
+          <td><v-text-field label="max_step" v-model.number="max_step"/></td>
+          <td><v-text-field label="gamma" v-model.number="gamma"/></td>
         </tr>
       </table>
-    </div>
-    <v-btn large v-on:click="start_maze">開始ボタン</v-btn>
-    <v-btn large v-on:click="stop_maze">終了ボタン</v-btn>
-    <table>
-      <tr v-if="iteration">iteration: {{ iteration }}</tr>
-      <tr v-if="step">step: {{ step }}</tr>
-      <tr>{{ status }}</tr>
-    </table>
+      <div v-if="selected_algorithm === 'sarsalambda'">
+        <table>
+          <tr>
+            <td><v-text-field label="alpha" v-model.number="alpha"/></td>
+            <td><v-text-field label="epsilon" v-model.number="epsilon"/></td>
+            <td><v-text-field label="lambda" v-model.number="lambda"/></td>
+          </tr>
+        </table>
+      </div>
+      <v-btn large v-on:click="start_maze">開始ボタン</v-btn>
+      <v-btn large v-on:click="stop_maze">終了ボタン</v-btn>
+      <table>
+        <tr v-if="iteration">iteration: {{ iteration }}</tr>
+        <tr v-if="step">step: {{ step }}</tr>
+        <tr>{{ status }}</tr>
+      </table>
 
-    <table id="table">
-      <template v-for="(row, i) in states">
-        <tr :key="i">
-          <template v-for="(state, j) in row">
-            <td v-bind:style="style(state)" v-if="(current_x === j) && (current_y === i)" :key="j">●</td>
-            <td v-bind:style="style(state)" v-else-if="(start_x === j) && (start_y === i)" :key="j">S</td>
-            <td v-bind:style="style(state)" v-else-if="goal_x === j && goal_y === i" :key="j">G</td>
-            <td v-bind:style="style(state)" v-else :key="j"></td>
-          </template>
-        </tr>
-      </template>
-    </table>
-  </div>
+      <table id="table">
+        <template v-for="(row, i) in states">
+          <tr :key="i">
+            <template v-for="(state, j) in row">
+              <td v-bind:style="style(state)" v-if="(current_x === j) && (current_y === i)" :key="j">●</td>
+              <td v-bind:style="style(state)" v-else-if="(start_x === j) && (start_y === i)" :key="j">S</td>
+              <td v-bind:style="style(state)" v-else-if="goal_x === j && goal_y === i" :key="j">G</td>
+              <td v-bind:style="style(state)" v-else :key="j"></td>
+            </template>
+          </tr>
+        </template>
+      </table>
+    </div>
+  </v-container>
 </template>
 
 <script>

@@ -18,7 +18,8 @@ npm run build
 node server.js
 ```
 
-# Heroku へのデプロイ
+# Deploy
+## Heroku
 1. 以下の URL からダウンロードし、Heroku CLI をインストール
 ```
 https://devcenter.heroku.com/articles/heroku-cli#download-and-install
@@ -32,18 +33,19 @@ heroku git:remote -a [app-name]
 ```
 git push heroku master
 ```
-
-
-
-# Tips
-- historyモードでURLを直接指定したとき404の対策
+## Google App Engine
+### 事前準備
+1. 以下の URL からダウンロードし、Heroku CLI をインストール
 ```
-https://noumisoblog.com/vue-router-history-mode/
+https://devcenter.heroku.com/articles/heroku-cli#download-and-install
 ```
-- build 時の console エラーを無視する
-    - .eslintrc.js に以下を追加
-    ```
-    rules: {
-        'no-console': 'off',
-    }
-    ```
+1. 以下のコマンドを実行し、heroku デプロイ用の Git リモートレポジトリを追加
+```
+heroku git:remote -a [app-name]
+```
+    - heroku コマンドに Path が通っていない場合は、(一時的でよいので) コマンドがあるディレクトリに Path を通す
+### 実行
+1. 以下のコマンドを実行
+```
+gcloud deploy app
+```

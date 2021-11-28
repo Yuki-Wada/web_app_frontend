@@ -7,11 +7,9 @@
                     <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
                     <v-img
                         alt="Vuetify Logo"
-                        class="shrink mr-2"
-                        contain
-                        src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-                        transition="scale-transition"
-                        width="40"
+                        :src="require(`@/assets/logo.png`)"
+                        max_height="40"
+                        max_width="40"
                     />
                 </div>
 
@@ -60,43 +58,8 @@
         <v-app-bar color="primary" dark app >
             <div class="d-flex align-center">
                 <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
-                <v-img
-                    alt="Vuetify Logo"
-                    class="shrink mr-2"
-                    contain
-                    src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-                    transition="scale-transition"
-                    width="40"
-                />
-
-                <v-img
-                    alt="Vuetify Name"
-                    class="shrink mt-1 hidden-sm-and-down"
-                    contain
-                    min-width="100"
-                    src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-                    width="100"
-                />
+                <font size="5" face="UD デジタル 教科書体 N-R">Yuki Wada's Homepage</font>
             </div>
-
-            <v-spacer></v-spacer>
-
-            <v-btn
-                href="/login"
-                text
-                v-if="aaa"
-            >
-                <span class="mr-2">Login</span>
-                <v-icon>mdi-open-in-new</v-icon>
-            </v-btn>
-            <v-btn
-                href="/logout"
-                text
-                v-if="!aaa"
-            >
-                <span class="mr-2">Logout</span>
-                <v-icon>mdi-open-in-new</v-icon>
-            </v-btn>
         </v-app-bar>
 
         <v-content>
@@ -104,7 +67,7 @@
         </v-content>
 
         <v-footer color="primary" dark app>
-            Vuetify
+            Yuki Wada
         </v-footer>
 
     </v-app>
@@ -125,8 +88,17 @@ export default {
                 link: "/"
             },
             {
-                name: "Applications",
-                icon: "mdi-view-dashboard",
+                name: "About",
+                icon: "mdi-account",
+                link: "/about",
+            },
+            // {
+            //     name: "Public-Relation",
+            //     icon: "mdi-web",
+            // },
+            {
+                name: "Games",
+                icon: "mdi-google-controller",
                 lists: [
                     {
                         name: "Maze Viewer",
@@ -137,17 +109,27 @@ export default {
                         link: "/reversi_viewer"
                     },
                     {
-                        name: "Unity WebGL",
-                        link: "/unity_webgl"
+                        name: "RTS Simulator",
+                        link: "/rts_simulator"
                     },
                 ]
             },
+            // {
+            //     name: "Applications",
+            //     icon: "mdi-cloud-search-outline",
+            // },
+            // {
+            //     name: "Outputs",
+            //     icon: "mdi-lightbulb-on-outline",
+            // },
+            // {
+            //     name: "Notes",
+            //     icon: "mdi-book-open-variant",
+            // },
         ]
     }),
-    computed: {
-        aaa() {
-            return !this.$store.state.auth.login.token;
-        }
-    }
+    mounted: function() {
+        document.title = "Yuki Wada's Homepage";
+    },
 };
 </script>

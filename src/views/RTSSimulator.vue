@@ -1,8 +1,5 @@
 <template>
   <div id="app">
-    <header>
-      <span>Vue.js PWA</span>
-    </header>
     <main>
       <unity src="unitybuild/Build/unitybuild.json"
         v-bind="{ width: gameWidth, height: gameHeight }"
@@ -37,5 +34,3 @@ export default {
   components: { unity }
 }
 </script>
-
-/// <style>は初期状態のまま編集してないので略 ///

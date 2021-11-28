@@ -10,39 +10,32 @@ const routes = [
     {
         path: '/',
         name: 'top_page',
-        component: Home
+        component: Home,
+        meta: { title: 'Yuki Wada のホームページ', desc: 'ディスクリプションを記述' }
     },
     {
         path: '/app',
         name: 'application',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/HelloWorld.vue')
+    },
+    {
+        path: '/about',
+        name: 'about',
+        component: () => import('../components/About.vue')
     },
     {
         path: '/maze_viewer',
         name: 'maze_viewer',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/MazeViewer.vue')
+        component: () => import('../views/MazeViewer.vue')
     },
     {
         path: '/reversi_viewer',
         name: 'reversi_viewer',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/ReversiViewer.vue')
+        component: () => import('../views/ReversiViewer.vue')
     },
     {
-        path: '/unity_webgl',
-        name: 'unity_webgl',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/UnityWebGL.vue')
+        path: '/rts_simulator',
+        name: 'rts_simulator',
+        component: () => import('../views/RTSSimulator.vue')
     },
     {
         path: '/login',

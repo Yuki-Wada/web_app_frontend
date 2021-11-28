@@ -1,38 +1,57 @@
 <template>
-  <div class="home">
-    <div id="selection">
-      <v-select
-        label="先手後手"
-        v-model="first_move"
-        :items="options"
-        item-text="text"
-        item-value="value"
-        outlined
-        dense
-      ></v-select>
-    </div>
-    <table>
-      <tr>
-        <td><v-text-field label="CPU 思考時間" v-model.number="mtcs_time_limit"/></td>
-      </tr>
-    </table>
-    <v-btn large v-on:click="start_game">開始ボタン</v-btn>
-    <p>{{ status }}</p>
-    <p>黒 ({{ black_side() }}): {{ black_count }}個</p>
-    <p>白 ({{ white_side() }}): {{ white_count }}個</p>
+  <v-container>
+    <div class="home">
+      <v-btn
+          href="/login"
+          text
+          v-if="aaa"
+      >
+          <span class="mr-2">Login</span>
+          <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+      <v-btn
+          href="/logout"
+          text
+          v-if="!aaa"
+      >
+          <span class="mr-2">Logout</span>
+          <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
 
-    <table id="table">
-      <template v-for="(row, i) in states">
-        <tr :key="i">
-          <template v-for="(state, j) in row">
-            <td v-bind:style="style('00FF00')" v-if="state === 1" v-on:click="place_stone(i, j)" :key="j">●</td>
-            <td v-bind:style="style('00FF00')" v-else-if="state === 2" v-on:click="place_stone(i, j)" :key="j">○</td>
-            <td v-bind:style="style('00FF00')" v-else v-on:click="place_stone(i, j)" :key="j"></td>
-          </template>
+      <div id="selection">
+        <v-select
+          label="先手後手"
+          v-model="first_move"
+          :items="options"
+          item-text="text"
+          item-value="value"
+          outlined
+          dense
+        ></v-select>
+      </div>
+      <table>
+        <tr>
+          <td><v-text-field label="CPU 思考時間" v-model.number="mtcs_time_limit"/></td>
         </tr>
-      </template>
-    </table>
-  </div>
+      </table>
+      <v-btn large v-on:click="start_game">開始ボタン</v-btn>
+      <p>{{ status }}</p>
+      <p>黒 ({{ black_side() }}): {{ black_count }}個</p>
+      <p>白 ({{ white_side() }}): {{ white_count }}個</p>
+
+      <table id="table">
+        <template v-for="(row, i) in states">
+          <tr :key="i">
+            <template v-for="(state, j) in row">
+              <td v-bind:style="style('00FF00')" v-if="state === 1" v-on:click="place_stone(i, j)" :key="j">●</td>
+              <td v-bind:style="style('00FF00')" v-else-if="state === 2" v-on:click="place_stone(i, j)" :key="j">○</td>
+              <td v-bind:style="style('00FF00')" v-else v-on:click="place_stone(i, j)" :key="j"></td>
+            </template>
+          </tr>
+        </template>
+      </table>
+    </div>
+  </v-container>
 </template>
 
 <script>
@@ -179,6 +198,11 @@ export default {
     },
   },
   created () {
+  },
+  computed: {
+      aaa() {
+          return !this.$store.state.auth.login.token;
+      }
   }
 }
 </script>
