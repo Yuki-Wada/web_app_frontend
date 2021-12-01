@@ -1,7 +1,7 @@
 <template>
     <v-app>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/3.8.95/css/materialdesignicons.css">
-        <v-navigation-drawer app v-model="drawer" clipped>
+        <v-navigation-drawer app v-model="drawer" temporary>
             <v-container>
                 <div style="display: flex;">
                     <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
@@ -16,7 +16,7 @@
                 <v-list-item>
                     <v-list-item-content>
                         <v-list-item-title class="title">
-                            Navigation lists
+                            Navigation Lists
                         </v-list-item-title>
                     </v-list-item-content>
                 </v-list-item>
@@ -51,11 +51,10 @@
                         </v-list-item>
                     </div>
                 </v-list>
-
             </v-container>
         </v-navigation-drawer>
 
-        <v-app-bar color="primary" dark app >
+        <v-app-bar color="indigo" dark app >
             <div class="d-flex align-center">
                 <v-app-bar-nav-icon @click="drawer=!drawer"></v-app-bar-nav-icon>
                 <font size="5" face="UD デジタル 教科書体 N-R">Yuki Wada's Homepage</font>
@@ -66,7 +65,7 @@
             <router-view />
         </v-content>
 
-        <v-footer color="primary" dark app>
+        <v-footer color="indigo" dark app>
             Yuki Wada
         </v-footer>
 
@@ -93,7 +92,7 @@ export default {
                 link: "/about",
             },
             // {
-            //     name: "Public-Relation",
+            //     name: "Public-Relations",
             //     icon: "mdi-web",
             // },
             {
@@ -117,6 +116,16 @@ export default {
             // {
             //     name: "Applications",
             //     icon: "mdi-cloud-search-outline",
+            //     lists: [
+            //         {
+            //             name: "Paper Network Viewer",
+            //             link: "/paper_network",
+            //         },
+            //         {
+            //             name: "Knowledge Graph Viewer",
+            //             link: "/knowledge_graph",
+            //         },
+            //     ]
             // },
             // {
             //     name: "Outputs",

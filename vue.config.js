@@ -8,7 +8,8 @@ module.exports = {
         ignored: /node_modules/,
         poll: true
       }
-    }
+    },
+    devtool: 'source-map',
   },
   publicPath: "./",
 }

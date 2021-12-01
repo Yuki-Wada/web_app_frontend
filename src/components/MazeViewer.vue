@@ -1,5 +1,8 @@
 <template>
   <v-container>
+    <div id="apper">
+      <input @change="selectedFile" type="file" name="file">
+    </div>
     <div class="home">
       <div id="selection">
         <v-select
@@ -55,6 +58,7 @@
 
 <script>
 import { w3cwebsocket } from 'websocket'
+import constant from '../constant.js'
 
 export default {
   name: "TrainMaze",
@@ -66,8 +70,7 @@ export default {
         { text: 'Value Iteration', value: 'valueiter' },
       ],
 
-      // host: '127.0.0.1:8888',
-      host: 'intense-chamber-41417.herokuapp.com',
+      host: constant['HOST'],
       websocket: null,
 
       warm_up_iteration: 100,
@@ -102,7 +105,7 @@ export default {
       this.iteration = null;
       this.step = null;
 
-      var self = this;
+      let self = this;
       function sleep(waitMsec) {
         var startMsec = new Date();
         while (new Date() - startMsec < waitMsec);
@@ -121,6 +124,7 @@ export default {
           config["max_iteration"] = self.max_iteration;
           config["max_step"] = self.max_step;
           config["gamma"] = self.gamma;
+
           if (self.selected_algorithm === "valueiter") {
             config["algorithm"] = "valueiter";
           }
@@ -137,7 +141,18 @@ export default {
             config["lambda"] = self.lambda;
           }
 
+          if (self.uploadFile) {
+            config["maze_exists"] = true;
+          }
+          else {
+            config["maze_exists"] = false;
+          }
+
           self.websocket.send(JSON.stringify({"status": "initialize_trainer", "config": config}));
+          self.status = "";
+        }
+        else if (recieved["status"] === "upload_maze") {
+          self.websocket.send(self.uploadFile);
           self.status = "";
         }
         else if (recieved["status"] === "trainer_construction") {
@@ -175,6 +190,12 @@ export default {
     },
     stop_maze() {
       this.websocket.close();
+    },
+    selectedFile: function(e) {
+        // 選択された File の情報を保存しておく
+        e.preventDefault();
+        let files = e.target.files;
+        this.uploadFile = files[0];
     },
   },
   created () {

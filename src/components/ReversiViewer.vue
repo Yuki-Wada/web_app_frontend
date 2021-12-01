@@ -56,6 +56,7 @@
 
 <script>
 import { w3cwebsocket } from 'websocket'
+import constant from '../constant.js'
 
 export default {
   name: "Reversi",
@@ -67,8 +68,8 @@ export default {
         { text: '後手', value: 'cpu' },
       ],
 
+      host: constant["HOST"],
       // host: '127.0.0.1:8888',
-      host: 'intense-chamber-41417.herokuapp.com',
       websocket: null,
 
       mtcs_time_limit: 10,

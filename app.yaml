@@ -8,6 +8,7 @@ handlers:
 
 - url: /(.*)
   static_files: dist/\1
+  # static_files: dist/index.html
   upload: dist/(.*)
 
 skip_files:

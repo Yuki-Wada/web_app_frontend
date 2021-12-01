@@ -25,12 +25,12 @@ const routes = [
     {
         path: '/maze_viewer',
         name: 'maze_viewer',
-        component: () => import('../views/MazeViewer.vue')
+        component: () => import('../components/MazeViewer.vue')
     },
     {
         path: '/reversi_viewer',
         name: 'reversi_viewer',
-        component: () => import('../views/ReversiViewer.vue')
+        component: () => import('../components/ReversiViewer.vue')
     },
     {
         path: '/rts_simulator',

@@ -6,46 +6,36 @@
 
 # 実行
 - 開発環境
-```
-npm run serve
-```
+    ```
+    npm run serve
+    ```
 - ビルド
-```
-npm run build
-```
+    ```
+    npm run build
+    ```
 - 本番環境
-```
-node server.js
-```
+    ```
+    node server.js
+    ```
 
 # Deploy
 ## Heroku
 1. 以下の URL からダウンロードし、Heroku CLI をインストール
-```
-https://devcenter.heroku.com/articles/heroku-cli#download-and-install
-```
+    ```
+    https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+    ```
 1. 以下のコマンドを実行し、heroku デプロイ用の Git リモートレポジトリを追加
-```
-heroku git:remote -a [app-name]
-```
+    ```
+    heroku git:remote -a [app-name]
+    ```
     - heroku コマンドに Path が通っていない場合は、(一時的でよいので) コマンドがあるディレクトリに Path を通す
 1. 以下のコマンドでデプロイ用のリモートレポジトリに push
-```
-git push heroku master
-```
+    ```
+    git push heroku master
+    ```
 ## Google App Engine
-### 事前準備
-1. 以下の URL からダウンロードし、Heroku CLI をインストール
-```
-https://devcenter.heroku.com/articles/heroku-cli#download-and-install
-```
-1. 以下のコマンドを実行し、heroku デプロイ用の Git リモートレポジトリを追加
-```
-heroku git:remote -a [app-name]
-```
-    - heroku コマンドに Path が通っていない場合は、(一時的でよいので) コマンドがあるディレクトリに Path を通す
 ### 実行
 1. 以下のコマンドを実行
-```
-gcloud deploy app
-```
+    ```
+    gcloud app deploy
+    ```

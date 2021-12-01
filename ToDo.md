@@ -6,6 +6,7 @@
         - AI
 - Applications
     - 論文分析ツール
+    - ナレッジグラフビューアー
     - 文章自動生成ツール
 - Outputs or Notes
     - 数学
