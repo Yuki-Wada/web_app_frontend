@@ -1,22 +1,29 @@
 <template>
   <v-container>
     <div class="home">
-      <v-btn
-          href="/login"
-          text
-          v-if="aaa"
-      >
-          <span class="mr-2">Login</span>
-          <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
-      <v-btn
-          href="/logout"
-          text
-          v-if="!aaa"
-      >
-          <span class="mr-2">Logout</span>
-          <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-row>
+        <v-col sm="9" class="d-flex justify-start">
+          ようこそ {{ user_name }} さん<v-spacer></v-spacer>
+        </v-col>
+        <v-col sm="3" class="d-flex justify-end">
+          <v-btn
+              to="/login"
+              text
+              v-if="is_authoreized"
+          >
+            <span class="mr-2">Login</span>
+            <v-icon>mdi-open-in-new</v-icon>
+          </v-btn>
+          <v-btn absolute right
+            to="/logout"
+            text
+            v-if="!is_authoreized"
+          >
+            <span class="mr-2">Logout</span>
+            <v-icon>mdi-open-in-new</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
 
       <div id="selection">
         <v-select
@@ -69,7 +76,6 @@ export default {
       ],
 
       host: constant["HOST"],
-      // host: '127.0.0.1:8888',
       websocket: null,
 
       mtcs_time_limit: 10,
@@ -201,9 +207,12 @@ export default {
   created () {
   },
   computed: {
-      aaa() {
-          return !this.$store.state.auth.login.token;
-      }
+    is_authoreized() {
+        return !this.$store.state.token;
+    },
+    user_name () {
+      return this.$store.state.user_name
+    }
   }
 }
 </script>

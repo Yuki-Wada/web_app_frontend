@@ -61,9 +61,9 @@
             </div>
         </v-app-bar>
 
-        <v-content>
+        <v-main>
             <router-view />
-        </v-content>
+        </v-main>
 
         <v-footer color="indigo" dark app>
             Yuki Wada

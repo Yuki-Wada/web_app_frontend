@@ -7,18 +7,18 @@
             <v-card-text>
                 <v-form>
                     <v-text-field
-                        v-model="user_name"
+                        v-model="input_user_name"
                         prepend-icon="mdi-account-circle"
                         label="ユーザ名"
                     />
-                    <v-text-field
+                    <!-- <v-text-field
                         :type="showPassword ? 'text' : 'password'"
                         v-model="password"
                         prepend-icon="mdi-lock"
                         :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                         label="パスワード"
                         @click:append="showPassword = !showPassword"
-                    />
+                    /> -->
                     <v-card-actions>
                         <v-btn class="info" v-on:click="auth">ログイン</v-btn>
                     </v-card-actions>
@@ -29,38 +29,23 @@
 </template>
 
 <script>
-import Axios from 'axios';
-
 export default {
     name: 'LoginAuthentication',
     data: () => ({
         showPassword : false,
-        user_name: "",
+        input_user_name: "",
         password: ""
     }),
     methods: {
         auth: function() {
-            let api_host = 8889;
-            let url = 'http://' + location.hostname + ':' + api_host + '/login';
-            let info = {
-                user_name: this.user_name,
-                password: this.password
+            let login_info = {
+                token: true,
+                user_name: this.input_user_name,
+                expire: 10
             };
-            Axios.post(
-                url, info
-            ).then( ( res ) => {
-                if (res.data)
-                {
-                    this.$store.dispatch("setLoginInfo", res.data)
-                    this.$router.push('/')
-                }
-                else{
-                    //console.log('bad!');
-                }
-            }).catch( ( ) => {
-                //console.error( res );
-            });
+            this.$store.dispatch("setLoginInfo", login_info)
+            this.$router.push('/');
         }
-    }
+    },
 };
 </script>

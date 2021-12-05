@@ -16,14 +16,14 @@ export default {
     }),
     created : function() {
         this.$store.dispatch(
-            "setLoginInfo", 
+            "setLoginInfo",
             {
                 token: false,
-                name: "ゲスト",
+                user_name: "Guest",
                 expire: 0
             }
         )
-        setInterval(() => { this.elapsed_time-- }, 1000)
+        setInterval(() => { this.elapsed_time-- }, 2000)
     },
     watch: {
     elapsed_time: function(time) {
