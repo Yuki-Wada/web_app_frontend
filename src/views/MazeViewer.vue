@@ -43,7 +43,6 @@
 
       <MazeBoard
         v-bind:states="states"
-        v-bind:websocket="websocket"
         v-bind:start_y="start_y"
         v-bind:start_x="start_x"
         v-bind:goal_y="goal_y"

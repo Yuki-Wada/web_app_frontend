@@ -19,7 +19,7 @@
 
 
 <script>
-import AuthHeader from "../components/AuthHeader"
+import AuthHeader from "@/components/AuthHeader"
 
 export default {
   name: "PaperNetwork",
@@ -28,28 +28,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-
-    #selection {
-      width: 500px;
-      padding: 20px;
-    }
-
-    #table {
-        margin:0 auto;
-        border-collapse: collapse;
-        border: 3px solid #ccc;
-    }
-
-    #table td {
-        border:1px solid #ccc;
-        height: 40px;
-        width: 40px;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 25px;
-        cursor: pointer;
-    }
-
-</style>

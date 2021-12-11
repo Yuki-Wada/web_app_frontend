@@ -35,7 +35,7 @@ const routes = [
     {
         path: '/maze_viewer',
         name: 'maze_viewer',
-        component: () => import('@/components/MazeViewer.vue')
+        component: () => import('@/views/MazeViewer.vue')
     },
     {
         path: '/reversi_viewer',
@@ -56,7 +56,7 @@ const routes = [
     {
         path: '/knowledge_graph',
         name: 'knowledge_graph',
-        component: () => import('@/views/KnowledgeGraph.vue'),
+        component: () => import('@/views/KnowledgeGraphViewer.vue'),
         meta: { requiresAuth: true }
     },
 ]

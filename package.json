@@ -14,8 +14,6 @@
     },
     "eslintConfig": {
         "rules": {
-            "no-console": "off",
-            "no-unused-vars": "off"
         }
     },
     "dependencies": {
@@ -25,6 +23,7 @@
         "express": "^4.17.1",
         "firebase": "^9.6.1",
         "hard-source-webpack-plugin": "^0.13.1",
+        "visjs-network": "^4.24.11",
         "vue": "^2.6.14",
         "vue-good-table": "^2.19.1",
         "vue-router": "^3.1.3",

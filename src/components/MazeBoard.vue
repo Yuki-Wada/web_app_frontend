@@ -20,7 +20,6 @@ export default {
   name: "MazeBoard",
   props: [
     "states",
-    "websocket",
     "start_y",
     "start_x",
     "goal_y",
