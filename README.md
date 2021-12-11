@@ -39,3 +39,20 @@
     ```
     gcloud app deploy
     ```
+
+# Tips
+- アイコン資源
+    - https://materialdesignicons.com/
+- historyモードでURLを直接指定したとき404の対策
+```
+https://noumisoblog.com/vue-router-history-mode/
+```
+- build 時の console エラーを無視する
+    - .eslintrc.js に以下を追加
+    ```
+    rules: {
+        'no-console': 'off',
+        'no-debugger': 'off',
+        'no-unused-vars': 'off'
+    }
+    ```

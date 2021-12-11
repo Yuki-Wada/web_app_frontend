@@ -20,7 +20,7 @@ export default {
   name: "ReversiBoard",
   props: [
     "states",
-    "websocket",
+    "handle_place_stone",
   ],
   data () {
     return {
@@ -32,10 +32,7 @@ export default {
       return "background: #" + rgb;
     },
     place_stone(i, j) {
-      this.websocket.send(JSON.stringify({
-        "status": "player_turn",
-        "place_stone": [i, j],
-      }));
+      this.handle_place_stone(i, j);
     },
   },
 }

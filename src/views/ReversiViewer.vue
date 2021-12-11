@@ -24,7 +24,7 @@
 
       <ReversiBoard
         v-bind:states="states"
-        v-bind:websocket="websocket"
+        v-bind:handle_place_stone="place_stone"
       />
 
     </div>
@@ -68,6 +68,12 @@ export default {
     white_side() {
       if (this.first_move === 'player') return 'CPU';
       return 'あなた';
+    },
+    place_stone(i, j) {
+      this.websocket.send(JSON.stringify({
+        "status": "player_turn",
+        "place_stone": [i, j],
+      }));
     },
     start_game() {
       this.websocket = new w3cwebsocket("wss://" + this.host + "/play_reversi");
