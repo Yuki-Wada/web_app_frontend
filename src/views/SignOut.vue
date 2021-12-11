@@ -9,28 +9,27 @@
 </template>
 
 <script>
+import { getAuth, signOut } from "firebase/auth";
+
 export default {
-    name: 'App',
+    name: 'SignOut',
     data: () => ({
         elapsed_time: 1
     }),
     created : function() {
-        this.$store.dispatch(
-            "setLoginInfo",
-            {
-                token: false,
-                user_name: "Guest",
-                expire: 0
-            }
-        )
-        setInterval(() => { this.elapsed_time-- }, 2000)
+        const auth = getAuth();
+        let self = this;
+        let redirect = this.$route.query.redirect;
+        signOut(auth).then(function() {
+            self.$router.push(redirect);
+        });
     },
     watch: {
-    elapsed_time: function(time) {
-        if (time <= 0) {
-            this.$router.push("/");
+        elapsed_time: function(time) {
+            if (time <= 0) {
+                this.$router.push("/");
+            }
         }
     }
-  }
 };
 </script>

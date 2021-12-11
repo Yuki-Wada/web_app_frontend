@@ -1,30 +1,6 @@
 <template>
   <v-container>
     <div class="home">
-      <v-row>
-        <v-col sm="9" class="d-flex justify-start">
-          ようこそ {{ user_name }} さん<v-spacer></v-spacer>
-        </v-col>
-        <v-col sm="3" class="d-flex justify-end">
-          <v-btn
-              to="/login"
-              text
-              v-if="is_authoreized"
-          >
-            <span class="mr-2">Login</span>
-            <v-icon>mdi-open-in-new</v-icon>
-          </v-btn>
-          <v-btn absolute right
-            to="/logout"
-            text
-            v-if="!is_authoreized"
-          >
-            <span class="mr-2">Logout</span>
-            <v-icon>mdi-open-in-new</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
-
       <div id="selection">
         <v-select
           label="先手後手"
@@ -64,6 +40,7 @@
 <script>
 import { w3cwebsocket } from 'websocket'
 import constant from '../constant.js'
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 export default {
   name: "Reversi",
@@ -205,13 +182,41 @@ export default {
     },
   },
   created () {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid;
+        console.log(uid);
+        console.log(user);
+        // ...
+      } else {
+        // User is signed out
+        // ...
+      }
+    });
   },
   computed: {
     is_authoreized() {
-        return !this.$store.state.token;
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (user) {
+        return true;
+      } else {
+        return false;
+      }
     },
     user_name () {
-      return this.$store.state.user_name
+      const auth = getAuth();
+      const user = auth.currentUser;
+
+      if (user) {
+        return user.email;
+      } else {
+        return "Guest";
+      }
     }
   }
 }

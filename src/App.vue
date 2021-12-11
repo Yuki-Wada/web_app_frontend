@@ -113,20 +113,20 @@ export default {
                     },
                 ]
             },
-            // {
-            //     name: "Applications",
-            //     icon: "mdi-cloud-search-outline",
-            //     lists: [
-            //         {
-            //             name: "Paper Network Viewer",
-            //             link: "/paper_network",
-            //         },
-            //         {
-            //             name: "Knowledge Graph Viewer",
-            //             link: "/knowledge_graph",
-            //         },
-            //     ]
-            // },
+            {
+                name: "Applications",
+                icon: "mdi-cloud-search-outline",
+                lists: [
+                    {
+                        name: "Paper Network Viewer",
+                        link: "/paper_network",
+                    },
+                    {
+                        name: "Knowledge Graph Viewer",
+                        link: "/knowledge_graph",
+                    },
+                ]
+            },
             // {
             //     name: "Outputs",
             //     icon: "mdi-lightbulb-on-outline",

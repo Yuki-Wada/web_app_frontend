@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Logout from '../views/Logout.vue'
+import { getAuth } from "firebase/auth";
 
 Vue.use(VueRouter)
 
@@ -13,8 +13,19 @@ const routes = [
         meta: { title: 'Yuki Wada のホームページ', desc: 'ディスクリプションを記述' }
     },
     {
-        path: '/app',
-        name: 'application',
+        path: '/signin',
+        name: 'signin',
+        component: () => import('../views/SignIn.vue')
+    },
+    {
+        path: '/signup',
+        name: 'signup',
+        component: () => import('../views/SignUp.vue')
+    },
+    {
+        path: '/signout',
+        name: 'signout',
+        component: () => import('../views/SignOut.vue')
     },
     {
         path: '/about',
@@ -37,21 +48,42 @@ const routes = [
         component: () => import('../views/RTSSimulator.vue')
     },
     {
-        path: '/login',
-        name: 'login',
-        component: () => import('../views/Login.vue')
+        path: '/paper_network',
+        name: 'paper_network',
+        component: () => import('../views/PaperNetwork.vue'),
+        meta: { requiresAuth: true }
     },
     {
-        path: '/logout',
-        name: 'logout',
-        component: Logout,
-    }
+        path: '/knowledge_graph',
+        name: 'knowledge_graph',
+        component: () => import('../views/KnowledgeGraph.vue'),
+        meta: { requiresAuth: true }
+    },
 ]
 
-const router = new VueRouter({
+let router = new VueRouter({
     mode: 'history',
     base: process.env.BASE_URL,
     routes,
+})
+
+
+router.beforeEach((to, from, next) => {
+    let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+    const auth = getAuth();
+    let currentUser = auth.currentUser
+    if (requiresAuth) {
+        if (!currentUser) {
+            next({
+                path: '/signin',
+                query: { redirect: to.fullPath }
+            })
+        } else {
+            next()
+    }
+    } else {
+        next()
+    }
 })
 
 export default router
