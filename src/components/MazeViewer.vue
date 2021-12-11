@@ -1,8 +1,5 @@
 <template>
   <v-container>
-    <div id="apper">
-      <input @change="selectedFile" type="file" name="file">
-    </div>
     <div class="home">
       <div id="selection">
         <v-select
@@ -32,6 +29,10 @@
           </tr>
         </table>
       </div>
+      <div id="app">
+        <input @change="selectedFile" type="file" name="file">
+      </div>
+
       <v-btn large v-on:click="start_maze">開始ボタン</v-btn>
       <v-btn large v-on:click="stop_maze">終了ボタン</v-btn>
       <table>
@@ -40,31 +41,33 @@
         <tr>{{ status }}</tr>
       </table>
 
-      <table id="table">
-        <template v-for="(row, i) in states">
-          <tr :key="i">
-            <template v-for="(state, j) in row">
-              <td v-bind:style="style(state)" v-if="(current_x === j) && (current_y === i)" :key="j">●</td>
-              <td v-bind:style="style(state)" v-else-if="(start_x === j) && (start_y === i)" :key="j">S</td>
-              <td v-bind:style="style(state)" v-else-if="goal_x === j && goal_y === i" :key="j">G</td>
-              <td v-bind:style="style(state)" v-else :key="j"></td>
-            </template>
-          </tr>
-        </template>
-      </table>
+      <MazeBoard
+        v-bind:states="states"
+        v-bind:websocket="websocket"
+        v-bind:start_y="start_y"
+        v-bind:start_x="start_x"
+        v-bind:goal_y="goal_y"
+        v-bind:goal_x="goal_x"
+        v-bind:current_y="current_y"
+        v-bind:current_x="current_x"
+      />
     </div>
   </v-container>
 </template>
 
 <script>
 import { w3cwebsocket } from 'websocket'
-import constant from '../constant.js'
+import constant from '@/constant.js'
+import MazeBoard from '@/components/MazeBoard'
 
 export default {
-  name: "TrainMaze",
+  name: "MazeViewer",
+  components: {
+    MazeBoard,
+  },
   data () {
     return {
-      selected_algorithm: 'sarsalambda',
+      selected_algorithm: 'valueiter',
       options: [
         { text: 'Sarsa(λ)', value: 'sarsalambda' },
         { text: 'Value Iteration', value: 'valueiter' },
@@ -86,20 +89,17 @@ export default {
       step: null,
       status: "",
 
+      states: [],
+
       start_y: 0,
       start_x: 1,
       goal_y: 14,
       goal_x: 13,
       current_y: 0,
       current_x: 0,
-
-      states: [],
     }
   },
   methods: {
-    style(rgb) {
-      return "background: #" + rgb;
-    },
     start_maze() {
       this.websocket = new w3cwebsocket("wss://" + this.host + "/train_maze");
       this.iteration = null;
@@ -198,32 +198,12 @@ export default {
         this.uploadFile = files[0];
     },
   },
-  created () {
-  }
 }
 </script>
 
 <style scoped>
-
-    #selection {
-      width: 500px;
-      padding: 20px;
-    }
-
-    #table {
-        margin:0 auto;
-        border-collapse: collapse;
-        border: 3px solid #ccc;
-    }
-
-    #table td {
-        border:1px solid #ccc;
-        height: 40px;
-        width: 40px;
-        text-align: center;
-        vertical-align: middle;
-        font-size: 25px;
-        cursor: pointer;
-    }
-
+  #selection {
+    width: 500px;
+    padding: 20px;
+  }
 </style>

@@ -1,29 +1,7 @@
 <template>
   <v-app>
     <div class="home">
-      <v-row>
-        <v-col sm="9" class="d-flex justify-start">
-          ようこそ {{ user_name }} さん<v-spacer></v-spacer>
-        </v-col>
-        <v-col sm="3" class="d-flex justify-end">
-          <v-btn
-              to="/signin"
-              text
-              v-if="!is_authoreized"
-          >
-            <span class="mr-2">Sign in</span>
-            <v-icon>mdi-open-in-new</v-icon>
-          </v-btn>
-          <v-btn absolute right
-            to="/signout?redirect=/paper_network"
-            text
-            v-if="is_authoreized"
-          >
-            <span class="mr-2">Sign out</span>
-            <v-icon>mdi-open-in-new</v-icon>
-          </v-btn>
-        </v-col>
-      </v-row>
+      <AuthHeader />
 
       <div id="selection">
         <v-card width="400px" class="mx-auto mt-5">
@@ -41,33 +19,13 @@
 
 
 <script>
-import { getAuth } from "firebase/auth";
+import AuthHeader from "../components/AuthHeader"
 
 export default {
   name: "PaperNetwork",
-  computed: {
-    is_authoreized() {
-      const auth = getAuth();
-      const user = auth.currentUser;
-
-      if (user) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    },
-    user_name () {
-      const auth = getAuth();
-      const user = auth.currentUser;
-
-      if (user) {
-        return user.email;
-      } else {
-        return "Guest";
-      }
-    }
-  }
+  components: {
+    AuthHeader,
+  },
 }
 </script>
 

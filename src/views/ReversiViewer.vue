@@ -22,28 +22,25 @@
       <p>黒 ({{ black_side() }}): {{ black_count }}個</p>
       <p>白 ({{ white_side() }}): {{ white_count }}個</p>
 
-      <table id="table">
-        <template v-for="(row, i) in states">
-          <tr :key="i">
-            <template v-for="(state, j) in row">
-              <td v-bind:style="style('00FF00')" v-if="state === 1" v-on:click="place_stone(i, j)" :key="j">●</td>
-              <td v-bind:style="style('00FF00')" v-else-if="state === 2" v-on:click="place_stone(i, j)" :key="j">○</td>
-              <td v-bind:style="style('00FF00')" v-else v-on:click="place_stone(i, j)" :key="j"></td>
-            </template>
-          </tr>
-        </template>
-      </table>
+      <ReversiBoard
+        v-bind:states="states"
+        v-bind:websocket="websocket"
+      />
+
     </div>
   </v-container>
 </template>
 
 <script>
 import { w3cwebsocket } from 'websocket'
-import constant from '../constant.js'
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import constant from '@/constant.js'
+import ReversiBoard from '@/components/ReversiBoard'
 
 export default {
   name: "Reversi",
+  components: {
+    ReversiBoard,
+  },
   data () {
     return {
       first_move: 'player',
@@ -53,27 +50,17 @@ export default {
       ],
 
       host: constant["HOST"],
-      websocket: null,
-
       mtcs_time_limit: 10,
-
       status: "",
+
       black_count: 2,
       white_count: 2,
 
       states: [],
+      websocket: null,
     }
   },
   methods: {
-    style(rgb) {
-      return "background: #" + rgb;
-    },
-    place_stone(i, j) {
-      this.websocket.send(JSON.stringify({
-        "status": "player_turn",
-        "place_stone": [i, j],
-      }));
-    },
     black_side() {
       if (this.first_move === 'player') return 'あなた';
       return 'CPU';
@@ -181,44 +168,6 @@ export default {
       this.websocket.close();
     },
   },
-  created () {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        console.log(uid);
-        console.log(user);
-        // ...
-      } else {
-        // User is signed out
-        // ...
-      }
-    });
-  },
-  computed: {
-    is_authoreized() {
-      const auth = getAuth();
-      const user = auth.currentUser;
-
-      if (user) {
-        return true;
-      } else {
-        return false;
-      }
-    },
-    user_name () {
-      const auth = getAuth();
-      const user = auth.currentUser;
-
-      if (user) {
-        return user.email;
-      } else {
-        return "Guest";
-      }
-    }
-  }
 }
 </script>
 

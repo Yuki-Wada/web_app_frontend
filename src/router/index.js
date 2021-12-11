@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Home from '@/components/Home.vue'
 import { getAuth } from "firebase/auth";
 
 Vue.use(VueRouter)
@@ -15,48 +15,48 @@ const routes = [
     {
         path: '/signin',
         name: 'signin',
-        component: () => import('../views/SignIn.vue')
+        component: () => import('@/views/SignIn.vue')
     },
     {
         path: '/signup',
         name: 'signup',
-        component: () => import('../views/SignUp.vue')
+        component: () => import('@/views/SignUp.vue')
     },
     {
         path: '/signout',
         name: 'signout',
-        component: () => import('../views/SignOut.vue')
+        component: () => import('@/views/SignOut.vue')
     },
     {
         path: '/about',
         name: 'about',
-        component: () => import('../components/About.vue')
+        component: () => import('@/components/About.vue')
     },
     {
         path: '/maze_viewer',
         name: 'maze_viewer',
-        component: () => import('../components/MazeViewer.vue')
+        component: () => import('@/components/MazeViewer.vue')
     },
     {
         path: '/reversi_viewer',
         name: 'reversi_viewer',
-        component: () => import('../components/ReversiViewer.vue')
+        component: () => import('@/views/ReversiViewer.vue')
     },
     {
         path: '/rts_simulator',
         name: 'rts_simulator',
-        component: () => import('../views/RTSSimulator.vue')
+        component: () => import('@/views/RTSSimulator.vue')
     },
     {
         path: '/paper_network',
         name: 'paper_network',
-        component: () => import('../views/PaperNetwork.vue'),
+        component: () => import('@/views/PaperNetwork.vue'),
         meta: { requiresAuth: true }
     },
     {
         path: '/knowledge_graph',
         name: 'knowledge_graph',
-        component: () => import('../views/KnowledgeGraph.vue'),
+        component: () => import('@/views/KnowledgeGraph.vue'),
         meta: { requiresAuth: true }
     },
 ]
@@ -66,7 +66,6 @@ let router = new VueRouter({
     base: process.env.BASE_URL,
     routes,
 })
-
 
 router.beforeEach((to, from, next) => {
     let requiresAuth = to.matched.some(record => record.meta.requiresAuth)
